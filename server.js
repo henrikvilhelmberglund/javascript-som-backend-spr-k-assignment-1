@@ -4,6 +4,14 @@ import express from "express";
 const app = express();
 const port = 3000;
 
+// ?  MongoDB init
+const client = new MongoClient("mongodb://localhost:27017");
+await client.connect();
+
+const db = client.db("memberList");
+const membersCollection = db.collection("members");
+
+// ?  Express init
 // ! if no parantheses - nothing happens
 app.use(express.urlencoded());
 app.use(express.static("public"));
@@ -46,12 +54,12 @@ app.get("/members/:query", async (req, res) => {
 
 app.get("/member/:id", async (req, res) => {
   const member = await membersCollection.findOne({
-    _id: new ObjectId(req.params.id),
+    _id: new ObjectId(+req.params.id),
   });
   res.render(
     "member",
     {
-      name: member.name,
+      name: member?.name,
     },
     (err, html) => {
       if (err) {
@@ -84,9 +92,3 @@ app.get("/:input", (req, res) => {
 app.listen(port, () =>
   console.log(`Started assignment server on port ${port}`)
 );
-
-const client = new MongoClient("mongodb://localhost:27017");
-await client.connect();
-
-const db = client.db("library");
-const membersCollection = db.collection("members");
