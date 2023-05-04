@@ -3,6 +3,9 @@
 <h2 class="text-3xl"><%= property %>:<%= value ?? "unknown name" %></h2>
 <% }); %>
 
-<a href="/">Index</a>
-<a href="/members">Members</a>
+<form action="/members/delete/<%= member._id %>" method="post">
+  <p>Delete user</p>
+  <button id="deleteButton" class="hover:bg-red-400 bg-red-500 p-4 rounded text-2xl">❌</button>
+</form>
+
 <%- include("footer") %>
