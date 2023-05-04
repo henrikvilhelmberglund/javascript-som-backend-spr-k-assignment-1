@@ -1,8 +1,9 @@
 <%- include("header") %>
 <form action="/members/" method="post">
-  <button name="default">Default</button>
-  <button name="asc">Asc</button>
-  <button name="desc">Desc</button>
+  <% sortAlternatives.forEach(alternative => { %>
+
+  <button class="hover:bg-blue-300 bg-blue-400 p-2 rounded mx-2" name="<%= alternative.toLowerCase(); %>"><%= alternative %></button>
+  <% }); %>
 </form>
 <% if (members.length) { %>
 <% members.forEach(member => {%>
@@ -11,7 +12,7 @@
     <%= member.name %>
   </a>
   <form action="/members/delete/<%= member._id %>" method="post">
-    <button class="bg-red-500 p-4 rounded text-2xl">❌</button>
+    <button class="hover:bg-red-400 bg-red-500 p-4 rounded text-2xl">❌</button>
   </form>
 </div>
 <% }); %>
