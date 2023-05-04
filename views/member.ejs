@@ -5,11 +5,11 @@
 <div class="flex justify-between">
   <form action="/members/update-member/<%=_id%>" method="post">
     <div class="flex flex-col w-96 gap-4">
-      <input type="text" value="<%= name %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Name" id="name" name="name" />
-      <input type="email" value="<%= email %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Email" id="email" name="email" />
-      <input type="number" value="<%= phone %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Phone" id="phone" name="phone" />
-      <input type="date" value="<%= date %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Date" id="date" name="date" />
-      <textarea type="text" rows="5" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="A short introduction to your character" id="character" name="character"><%= character %></textarea>
+      <input required type="text" value="<%= name %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Name" id="name" name="name" />
+      <input required type="email" value="<%= email %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Email" id="email" name="email" />
+      <input required type="number" value="<%= phone %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Phone" id="phone" name="phone" />
+      <input required type="date" value="<%= date %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Date" id="date" name="date" />
+      <textarea required type="text" rows="5" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="A short introduction to your character" id="character" name="character"><%= character %></textarea>
       <button class="p-4 bg-blue-500 rounded-lg">Update info</button>
     </div>
   </form>

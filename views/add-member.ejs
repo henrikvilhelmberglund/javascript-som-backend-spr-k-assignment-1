@@ -2,11 +2,11 @@
 
 <form action="/members/add-member" method="post">
   <div class="flex flex-col w-96 gap-4">
-    <input type="text" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Name" id="name" name="name" />
-    <input type="email" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Email" id="email" name="email" />
-    <input type="number" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Phone" id="phone" name="phone" />
-    <input type="date" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Date" id="date" name="date" />
-    <textarea type="text" rows="5" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="A short introduction to your character" id="character" name="character"></textarea>
+    <input required type="text" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Name" id="name" name="name" />
+    <input required type="email" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Email" id="email" name="email" />
+    <input required type="number" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Phone" id="phone" name="phone" />
+    <input required type="date" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Date" id="date" name="date" />
+    <textarea required type="text" rows="5" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="A short introduction to your character" id="character" name="character"></textarea>
     <button class="p-4 bg-blue-500 rounded-lg">Add member</button>
   </div>
 </form>

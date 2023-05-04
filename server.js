@@ -89,6 +89,7 @@ app.post("/members/update-member/:id", async (req, res) => {
   console.log(req.body);
   await membersCollection.updateOne(member, { $set: req.body });
   // res.json(req.body);
+  // res.redirect(`/member/${id}`);
   res.redirect(`/member/${id}`);
 });
 

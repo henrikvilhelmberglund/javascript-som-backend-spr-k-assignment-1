@@ -11,9 +11,12 @@
   <a class="hover:outline-black hover:outline hover:outline-1 flex flex-col justify-center items-center text-2xl w-64 h-16 shadow-xl rounded-lg" href="/member/<%= member._id %>">
     <%= member.name %>
   </a>
-  <form action="/members/delete/<%= member._id %>" method="post">
-    <button class="hover:bg-red-400 bg-red-500 p-4 rounded text-2xl">❌</button>
-  </form>
+  <div class="flex ">
+
+    <form action="/members/delete/<%= member._id %>" method="post">
+      <button class="hover:bg-red-400 bg-red-500 p-4 rounded text-2xl">❌</button>
+    </form>
+  </div>
 </div>
 <% }); %>
 <% } else { %>
