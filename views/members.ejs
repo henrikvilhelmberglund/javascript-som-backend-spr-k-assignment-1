@@ -1,0 +1,9 @@
+<%- include("header") %>
+<ul>
+  <% members.forEach(book => {%>
+  <a href="/member/<%= member._id %>">
+    <li><%= member.name %></li>
+  </a>
+  <% }); %>
+</ul>
+<%- include("footer") %>
