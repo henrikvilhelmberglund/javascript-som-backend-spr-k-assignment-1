@@ -1,13 +1,10 @@
 <%- include("header") %>
 <% if (members.length) { %>
-<ul>
-
-  <% members.forEach(member => {%>
-  <a href="/member/<%= member._id %>">
-    <li><%= member.name %></li>
-  </a>
-  <% }); %>
-</ul>
+<% members.forEach(member => {%>
+<a class="hover:outline-black hover:outline hover:outline-1 flex flex-col justify-center items-center text-2xl w-64 h-16 shadow-xl rounded-lg" href="/member/<%= member._id %>">
+  <%= member.name %>
+</a>
+<% }); %>
 <% } else { %>
 <h2 class="text-3xl text-red-600">The members list is empty.</h2>
 <% } %>
