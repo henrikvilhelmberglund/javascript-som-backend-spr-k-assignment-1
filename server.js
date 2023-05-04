@@ -33,6 +33,17 @@ app.post("/members/create", async (req, res) => {
   res.redirect("/members");
 });
 
+app.get("/members/:query", async (req, res) => {
+  res.render(req.params.query, { title: "query" }, (err, html) => {
+    if (err) {
+      res.status(404).render("404", {
+        title: `404: page not found`,
+      });
+    }
+    res.send(html);
+  });
+});
+
 app.get("/member/:id", async (req, res) => {
   const member = await membersCollection.findOne({
     _id: new ObjectId(req.params.id),
