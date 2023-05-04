@@ -48,9 +48,20 @@ app.get("/member/:id", async (req, res) => {
   const member = await membersCollection.findOne({
     _id: new ObjectId(req.params.id),
   });
-  res.render("member", {
-    name: member.name,
-  });
+  res.render(
+    "member",
+    {
+      name: member.name,
+    },
+    (err, html) => {
+      if (err) {
+        res.status(404).render("404", {
+          title: `404: page not found`,
+        });
+      }
+      res.send(html);
+    }
+  );
 });
 
 app.get("/:input", (req, res) => {
