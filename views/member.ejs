@@ -1,5 +1,7 @@
 <%- include("header") %>
-<h2 class="text-3xl">Name: <%= name ?? "unknown name" %></h2>
+<% Object.entries(member).forEach(([property, value]) => { %>
+<h2 class="text-3xl"><%= property %>:<%= value ?? "unknown name" %></h2>
+<% }); %>
 
 <a href="/">Index</a>
 <a href="/members">Members</a>
