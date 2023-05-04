@@ -1,0 +1,19 @@
+{
+  "name": "javascript-som-backend-spr-k-assignment-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henrikvilhelmberglund/javascript-som-backend-spr-k-assignment-1.git"
+  },
+  "author": "Henrik Berglund",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/henrikvilhelmberglund/javascript-som-backend-spr-k-assignment-1/issues"
+  },
+  "homepage": "https://github.com/henrikvilhelmberglund/javascript-som-backend-spr-k-assignment-1#readme"
+}
