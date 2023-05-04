@@ -30,6 +30,7 @@ app.get("/members", async (req, res) => {
     title: "List of our members",
     members,
     sort: "default",
+    sortAlternatives: ["Default", "Asc", "Desc"],
   });
 });
 
@@ -38,15 +39,12 @@ app.post("/members/", async (req, res) => {
   // console.log(Object.keys(req.body)[0]);
   const sortType = Object.keys(req.body)[0];
 
-  if (sortType === "asc") {
+  if (sortType !== "default") {
     members.sort((a, b) => {
-      if (a.name < b.name) return 1;
-      if (b.name < a.name) return -1;
-    });
-  } else if (sortType === "desc") {
-    members.sort((a, b) => {
-      if (a.name < b.name) return -1;
-      if (b.name < a.name) return 1;
+      if (a.name.toLowerCase() < b.name.toLowerCase())
+        return sortType === "asc" ? -1 : 1;
+      if (b.name.toLowerCase() < a.name.toLowerCase())
+        return sortType === "asc" ? 1 : -1;
     });
   }
 
@@ -55,14 +53,9 @@ app.post("/members/", async (req, res) => {
     title: "List of our members",
     members,
     sort: "default",
+    sortAlternatives: ["Default", "Asc", "Desc"],
   });
 });
-// console.log(members);
-// res.json(members);
-// res.render("members", {
-//   title: "List of our members",
-//   members,
-// });
 
 app.get("/members/add-member", async (req, res) => {
   const members = await membersCollection.find({}).toArray();
