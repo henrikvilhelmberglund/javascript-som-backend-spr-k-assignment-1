@@ -80,6 +80,18 @@ app.post("/members/add-member", async (req, res) => {
   res.redirect("/members");
 });
 
+app.post("/members/update-member/:id", async (req, res) => {
+  const id = new ObjectId(req.params.id);
+  const member = await membersCollection.findOne({
+    _id: id,
+  });
+  console.log(member);
+  console.log(req.body);
+  await membersCollection.updateOne(member, { $set: req.body });
+  // res.json(req.body);
+  res.redirect(`/member/${id}`);
+});
+
 app.post("/members/delete/:id", async (req, res) => {
   const member = await membersCollection.findOne({
     _id: new ObjectId(req.params.id),
