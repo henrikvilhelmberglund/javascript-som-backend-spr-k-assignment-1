@@ -54,15 +54,17 @@ app.get("/members/:query", async (req, res) => {
 
 app.get("/member/:id", async (req, res) => {
   const member = await membersCollection.findOne({
-    _id: new ObjectId(+req.params.id),
+    _id: new ObjectId(req.params.id),
   });
   res.render(
     "member",
     {
       name: member?.name,
+      title: `${member?.name}'s page`,
     },
     (err, html) => {
       if (err) {
+        console.log(err);
         res.status(404).render("404", {
           title: `404: page not found`,
         });
