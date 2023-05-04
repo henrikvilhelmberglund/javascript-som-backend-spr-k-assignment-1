@@ -41,6 +41,12 @@ app.post("/members/create", async (req, res) => {
   res.redirect("/members");
 });
 
+app.post("/members/create", async (req, res) => {
+  await membersCollection.insertOne(req.body);
+  // res.json(members);
+  res.redirect("/members");
+});
+
 app.get("/members/:query", async (req, res) => {
   res.render(req.params.query, { title: "query" }, (err, html) => {
     if (err) {
