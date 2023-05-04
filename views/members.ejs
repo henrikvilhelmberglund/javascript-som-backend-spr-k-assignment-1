@@ -1,9 +1,14 @@
 <%- include("header") %>
+<% if (members.length) { %>
 <ul>
-  <% members.forEach(book => {%>
+
+  <% members.forEach(member => {%>
   <a href="/member/<%= member._id %>">
     <li><%= member.name %></li>
   </a>
   <% }); %>
 </ul>
+<% } else { %>
+<h2 class="text-3xl text-red-600">The members list is empty.</h2>
+<% } %>
 <%- include("footer") %>
