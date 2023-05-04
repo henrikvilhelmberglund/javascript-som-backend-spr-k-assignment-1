@@ -1,4 +1,9 @@
 <%- include("header") %>
+<form action="/members/" method="post">
+  <button name="default">Default</button>
+  <button name="asc">Asc</button>
+  <button name="desc">Desc</button>
+</form>
 <% if (members.length) { %>
 <% members.forEach(member => {%>
 <div class="flex gap-10">

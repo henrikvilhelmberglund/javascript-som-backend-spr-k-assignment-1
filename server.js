@@ -26,8 +26,43 @@ app.get("/", async (req, res) => {
 app.get("/members", async (req, res) => {
   const members = await membersCollection.find({}).toArray();
   // res.json(members);
-  res.render("members", { title: "List of our members", members });
+  res.render("members", {
+    title: "List of our members",
+    members,
+    sort: "default",
+  });
 });
+
+app.post("/members/", async (req, res) => {
+  let members = await membersCollection.find({}).toArray();
+  // console.log(Object.keys(req.body)[0]);
+  const sortType = Object.keys(req.body)[0];
+
+  if (sortType === "asc") {
+    members.sort((a, b) => {
+      if (a.name < b.name) return 1;
+      if (b.name < a.name) return -1;
+    });
+  } else if (sortType === "desc") {
+    members.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (b.name < a.name) return 1;
+    });
+  }
+
+  // res.redirect(`/members/?sort=${sortType}`);
+  res.render("members", {
+    title: "List of our members",
+    members,
+    sort: "default",
+  });
+});
+// console.log(members);
+// res.json(members);
+// res.render("members", {
+//   title: "List of our members",
+//   members,
+// });
 
 app.get("/members/add-member", async (req, res) => {
   const members = await membersCollection.find({}).toArray();
@@ -35,7 +70,7 @@ app.get("/members/add-member", async (req, res) => {
   res.render("add-member", { title: "Add a new member", members });
 });
 
-app.post("/members/create", async (req, res) => {
+app.post("/members/add-member", async (req, res) => {
   await membersCollection.insertOne(req.body);
   // res.json(members);
   res.redirect("/members");
@@ -50,17 +85,6 @@ app.post("/members/delete/:id", async (req, res) => {
   res.redirect("/members");
 });
 
-app.get("/members/:query", async (req, res) => {
-  res.render(req.params.query, { title: "query" }, (err, html) => {
-    if (err) {
-      res.status(404).render("404", {
-        title: `404: page not found`,
-      });
-    }
-    res.send(html);
-  });
-});
-
 app.get("/member/:id", async (req, res) => {
   const member = await membersCollection.findOne({
     _id: new ObjectId(req.params.id),
@@ -68,7 +92,7 @@ app.get("/member/:id", async (req, res) => {
   res.render(
     "member",
     {
-      name: member?.name,
+      member,
       title: `${member?.name}'s page`,
     },
     (err, html) => {
