@@ -41,8 +41,11 @@ app.post("/members/create", async (req, res) => {
   res.redirect("/members");
 });
 
-app.post("/members/create", async (req, res) => {
-  await membersCollection.insertOne(req.body);
+app.post("/members/delete/:id", async (req, res) => {
+  const member = await membersCollection.findOne({
+    _id: new ObjectId(req.params.id),
+  });
+  await membersCollection.deleteOne(member);
   // res.json(members);
   res.redirect("/members");
 });
