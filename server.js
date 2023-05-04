@@ -35,18 +35,29 @@ app.get("/members", async (req, res) => {
 });
 
 app.post("/members/", async (req, res) => {
-  let members = await membersCollection.find({}).toArray();
-  // console.log(Object.keys(req.body)[0]);
   const sortType = Object.keys(req.body)[0];
-
+  const sortNumber = sortType === "asc" ? 1 : -1;
+  let members;
   if (sortType !== "default") {
-    members.sort((a, b) => {
-      if (a.name.toLowerCase() < b.name.toLowerCase())
-        return sortType === "asc" ? -1 : 1;
-      if (b.name.toLowerCase() < a.name.toLowerCase())
-        return sortType === "asc" ? 1 : -1;
-    });
+    members = await membersCollection
+      .find({})
+      .collation({ locale: "en" })
+      .sort({ name: sortNumber })
+      .toArray();
+  } else {
+    members = await membersCollection.find({}).toArray();
   }
+
+  // ? slightly less optimal because the sorting is done on the server and uses server CPU
+  // let members = await membersCollection.find({}).toArray();
+  // if (sortType !== "default") {
+  //   members.sort((a, b) => {
+  //     if (a.name.toLowerCase() < b.name.toLowerCase())
+  //       return sortType === "asc" ? -1 : 1;
+  //     if (b.name.toLowerCase() < a.name.toLowerCase())
+  //       return sortType === "asc" ? 1 : -1;
+  //   });
+  // }
 
   // res.redirect(`/members/?sort=${sortType}`);
   res.render("members", {
