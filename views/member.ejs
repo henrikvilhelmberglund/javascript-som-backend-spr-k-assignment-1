@@ -1,11 +1,32 @@
 <%- include("header") %>
-<% Object.entries(member).forEach(([property, value]) => { %>
-<h2 class="text-3xl"><%= property %>:<%= value ?? "unknown name" %></h2>
-<% }); %>
+<% const {_id, name, email, phone, date, character} = member; %>
 
-<form action="/members/delete/<%= member._id %>" method="post">
-  <p>Delete user</p>
-  <button id="deleteButton" class="hover:bg-red-400 bg-red-500 p-4 rounded text-2xl">❌</button>
-</form>
+
+<div class="flex justify-between">
+  <form action="/members/update-member/<%=_id%>" method="post">
+    <div class="flex flex-col w-96 gap-4">
+      <input type="text" value="<%= name %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Name" id="name" name="name" />
+      <input type="email" value="<%= email %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Email" id="email" name="email" />
+      <input type="number" value="<%= phone %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Phone" id="phone" name="phone" />
+      <input type="date" value="<%= date %>" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="Date" id="date" name="date" />
+      <textarea type="text" rows="5" class="p-2 outline-1 outline-black outline-solid rounded" placeholder="A short introduction to your character" id="character" name="character"><%= character %></textarea>
+      <button class="p-4 bg-blue-500 rounded-lg">Update info</button>
+    </div>
+  </form>
+
+  <div class="flex flex-col gap-4 p-12 items-start justify-center bg-amber-100 rounded-2xl">
+
+    <h2 class="text-5xl"><%= name ?? "unknown name" %></h2>
+    <p class="text-2xl text-blue-700"><%= email ?? "unknown email" %></p>
+    <p class="text-2xl"><%= phone ?? "unknown phone" %></p>
+    <p class="text-2xl"><%= date ?? "unknown date" %></p>
+    <p class="text-2xl"><%= character ?? "unknown character" %></p>
+
+  </div>
+  <form action="/members/delete/<%= member._id %>" method="post">
+    <p>Delete user</p>
+    <button id="deleteButton" class="hover:bg-red-400 bg-red-500 p-4 rounded text-2xl">❌</button>
+  </form>
+</div>
 
 <%- include("footer") %>
