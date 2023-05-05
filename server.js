@@ -1,11 +1,8 @@
 import { MongoClient, ObjectId } from "mongodb";
 import express from "express";
 
-const app = express();
-const port = 3000;
-
 // ?  MongoDB init
-const client = new MongoClient("mongodb://localhost:27017");
+const client = new MongoClient("mongodb://127.0.0.1:27017");
 await client.connect();
 
 const db = client.db("memberList");
@@ -13,6 +10,9 @@ const membersCollection = db.collection("members");
 
 // ?  Express init
 // ! if no parantheses - nothing happens
+
+const app = express();
+const port = 3000;
 app.use(express.urlencoded());
 app.use(express.static("public"));
 
